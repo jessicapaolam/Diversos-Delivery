@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-
-import List from './Components/List/List';
-import Navbar from './Components/Navbar/Navbar';
+import AppRouter from "./Components/RouterComponent.jsx";
+import NavBar from "./Components/Navbar/Navbar.jsx";
+import Container from '@material-ui/core/Container';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar></Navbar>
-      <List></List>
+    <div>
+      <NavBar/>
+        <Container>
+          <AppRouter/>
+        </Container>
     </div>
   );
 }
