@@ -4,13 +4,18 @@ import AppRouter from "./Components/RouterComponent.jsx";
 import NavBar from "./Components/Navbar/Navbar.jsx";
 import Container from '@material-ui/core/Container';
 
+import { ApolloProvider } from 'react-apollo';
+import apolloClient from './Services/Apollo';
+
 function App() {
   return (
     <div>
-      <NavBar/>
-        <Container>
-          <AppRouter/>
-        </Container>
+      <ApolloProvider client={apolloClient}>
+        <NavBar/>
+          <Container>
+            <AppRouter/>
+          </Container>
+      </ApolloProvider>
     </div>
   );
 }

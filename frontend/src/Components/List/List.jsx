@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ApiService from "../../Services/ApiService";
+// import ApiService from "../../Services/ApiService";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,35 +7,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CreateIcon from '@material-ui/icons/Create';
 
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
 class ListComponent extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            data: [],
-            message: null
-        }
-        this.details = this.details.bind(this);
-        this.reloadList = this.reloadList.bind(this);
-    }
-
-    componentDidMount() {
-        this.reloadList();
-    }
-
-    reloadList() {
-        ApiService.fetchAllData()
-            .then((res) => {
-                this.setState({data: res.data.result})
-            });
-    }
-
-    details(id) {
-        window.localStorage.setItem("userId", id);
-        // this.props.history.push('/details');
-    }
-
     render() {
+        console.log(this.props);
         return (
             <div>
                 <Table>
@@ -50,20 +27,20 @@ class ListComponent extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.state.data.map(row => (
+                        {/* {this.state.list.map(row => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
                                     {row.id}
                                 </TableCell>
-                                <TableCell align="right">{row.firstName}</TableCell>
-                                <TableCell align="right">{row.lastName}</TableCell>
-                                <TableCell align="right">{row.username}</TableCell>
-                                <TableCell align="right">{row.age}</TableCell>
-                                <TableCell align="right">{row.salary}</TableCell>
-                                <TableCell align="right" onClick={() => this.details(row.id)}><CreateIcon /></TableCell>
+                                <TableCell align="right">{row._id}</TableCell>
+                                <TableCell align="right">{row.store}</TableCell>
+                                <TableCell align="right">{row.data}</TableCell>
+                                <TableCell align="right">{row.customer.name}</TableCell>
+                                <TableCell align="right">{row.amount}</TableCell>
+                                <TableCell align="right" onClick={() => this.details(row._id)}><CreateIcon /></TableCell>
 
                             </TableRow>
-                        ))}
+                        ))} */}
                     </TableBody>
                 </Table>
 
@@ -73,4 +50,13 @@ class ListComponent extends Component {
 
 }
 
-export default ListComponent;
+const ListQuery = gql `
+query orderList {
+    orders {
+        _id
+        reference        
+    }
+}
+`;
+
+export default graphql(ListQuery, { name: 'orderList' })(ListComponent);
