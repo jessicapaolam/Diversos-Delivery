@@ -9,7 +9,7 @@ Navegue pela linha de comando até a pasta onde salva os seus projetos e clone e
 Em seguida navegue até a pasta frontend:
 
  ```
-  cd frontend
+  cd frontend/
 ```
 
 Faça a instalação das dependências do projeto:
